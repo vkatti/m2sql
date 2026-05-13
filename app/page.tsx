@@ -20,6 +20,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [autoTranslate, setAutoTranslate] = useState(false);
+  const [exampleModalOpen, setExampleModalOpen] = useState(false);
 
   const handleTranslate = async (code?: string) => {
     const codeToTranslate = code || mCode;
@@ -157,20 +158,26 @@ export default function Home() {
             </Alert>
           )}
 
-          {/* Example Selector - Collapsible */}
-          <ExampleSelector onLoadExample={handleLoadExample} autoTranslate={autoTranslate} />
-
           {/* Quick Actions Bar */}
           <div className="flex items-center justify-between gap-3 flex-wrap">
-            <label className="flex items-center gap-2.5 text-sm text-muted-foreground cursor-pointer hover:text-foreground transition-colors bg-card/40 backdrop-blur-sm px-4 py-2 rounded-full border border-border/20">
-              <input
-                type="checkbox"
-                checked={autoTranslate}
-                onChange={(e) => setAutoTranslate(e.target.checked)}
-                className="w-4 h-4 rounded border-border accent-primary cursor-pointer"
+            <div className="flex items-center gap-3">
+              <ExampleSelector
+                onLoadExample={handleLoadExample}
+                autoTranslate={autoTranslate}
+                open={exampleModalOpen}
+                onOpenChange={setExampleModalOpen}
               />
-              <span className="font-medium">Auto-translate examples</span>
-            </label>
+
+              <label className="flex items-center gap-2.5 text-sm text-muted-foreground cursor-pointer hover:text-foreground transition-colors bg-card/40 backdrop-blur-sm px-4 py-2 rounded-full border border-border/20">
+                <input
+                  type="checkbox"
+                  checked={autoTranslate}
+                  onChange={(e) => setAutoTranslate(e.target.checked)}
+                  className="w-4 h-4 rounded border-border accent-primary cursor-pointer"
+                />
+                <span className="font-medium">Auto-translate examples</span>
+              </label>
+            </div>
 
             <Button
               variant="outline"

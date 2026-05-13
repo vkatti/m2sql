@@ -1,20 +1,27 @@
 "use client";
 
-import { useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog";
 import { examples } from "@/app/data/examples";
-import { Sparkles, ChevronRight, ChevronDown, ChevronUp } from "lucide-react";
+import { Sparkles, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface ExampleSelectorProps {
     onLoadExample: (mCode: string) => void;
     autoTranslate?: boolean;
+    open?: boolean;
+    onOpenChange?: (open: boolean) => void;
 }
 
-export function ExampleSelector({ onLoadExample, autoTranslate }: ExampleSelectorProps) {
-    const [isExpanded, setIsExpanded] = useState(false);
+export function ExampleSelector({ onLoadExample, autoTranslate, open, onOpenChange }: ExampleSelectorProps) {
     const basicExamples = examples.filter((ex) => ex.category === "basic");
     const intermediateExamples = examples.filter((ex) => ex.category === "intermediate");
     const advancedExamples = examples.filter((ex) => ex.category === "advanced");
@@ -32,71 +39,69 @@ export function ExampleSelector({ onLoadExample, autoTranslate }: ExampleSelecto
         }
     };
 
-    return (
-        <Card className="backdrop-blur-xl bg-card/70 border border-border/40 shadow-lg rounded-2xl overflow-hidden shrink-0 transition-all">
-            <CardHeader
-                className="pb-3 cursor-pointer hover:bg-accent/5 transition-colors"
-                onClick={() => setIsExpanded(!isExpanded)}
-            >
-                <div className="flex items-center justify-between">
-                    <div className="flex-1">
-                        <CardTitle className="flex items-center gap-2 text-base">
-                            <Sparkles className="h-4 w-4 text-accent" />
-                            Quick Start Examples
-                        </CardTitle>
-                        <CardDescription className="text-xs mt-1">
-                            {autoTranslate
-                                ? "Click to load and translate instantly"
-                                : "Click to load into editor"}
-                        </CardDescription>
-                    </div>
-                    <Button
-                        variant="ghost"
-                        size="sm"
-                        className="h-8 w-8 p-0 rounded-full"
-                    >
-                        {isExpanded ? (
-                            <ChevronUp className="h-4 w-4" />
-                        ) : (
-                            <ChevronDown className="h-4 w-4" />
-                        )}
-                    </Button>
-                </div>
-            </CardHeader>
+    const handleExampleClick = (mCode: string) => {
+        onLoadExample(mCode);
+        onOpenChange?.(false); // Close the modal after selection
+    };
 
-            {isExpanded && (
-                <CardContent className="space-y-4 max-h-[400px] overflow-y-auto scrollbar-thin scrollbar-thumb-border/60 scrollbar-track-transparent animate-in slide-in-from-top-2">
+    return (
+        <Dialog open={open} onOpenChange={onOpenChange}>
+            <DialogTrigger
+                render={
+                    <Button
+                        variant="outline"
+                        className="gap-2 backdrop-blur-xl bg-card/70 border border-border/40 shadow-md hover:shadow-lg transition-all rounded-full"
+                    />
+                }
+            >
+                <Sparkles className="h-4 w-4 text-accent" />
+                Quick Start Examples
+            </DialogTrigger>
+            <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+                <DialogHeader>
+                    <DialogTitle className="flex items-center gap-2 text-xl">
+                        <Sparkles className="h-5 w-5 text-accent" />
+                        Quick Start Examples
+                    </DialogTitle>
+                    <DialogDescription>
+                        {autoTranslate
+                            ? "Click to load and translate instantly"
+                            : "Click to load into editor"}
+                    </DialogDescription>
+                </DialogHeader>
+
+                <div className="space-y-6 mt-4">
                     {/* Basic Examples */}
                     {basicExamples.length > 0 && (
-                        <div className="space-y-2">
-                            <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+                        <div className="space-y-3">
+                            <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
                                 Basic
                             </h4>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                 {basicExamples.map((example) => (
                                     <button
                                         key={example.id}
-                                        onClick={() => onLoadExample(example.mCode)}
+                                        onClick={() => handleExampleClick(example.mCode)}
                                         className={cn(
-                                            "group w-full text-left p-3 rounded-xl border transition-all",
+                                            "group w-full text-left p-4 rounded-xl border transition-all",
                                             "hover:scale-[1.02] hover:shadow-md hover:border-accent/60",
                                             "bg-card/50 hover:bg-accent/10",
-                                            "focus:outline-none focus:ring-1 focus:ring-ring"
+                                            "focus:outline-none focus:ring-2 focus:ring-ring"
                                         )}
                                     >
                                         <div className="flex items-center justify-between gap-2">
                                             <div className="flex items-center gap-2 flex-1 min-w-0">
                                                 <Badge
                                                     variant="outline"
-                                                    className={cn("text-[10px] py-0 px-1.5 shrink-0", getCategoryColor(example.category))}
+                                                    className={cn("text-[10px] py-0.5 px-2 shrink-0", getCategoryColor(example.category))}
                                                 >
                                                     {example.category}
                                                 </Badge>
-                                                <span className="font-medium text-xs truncate">
+                                                <span className="font-medium text-sm truncate">
                                                     {example.title}
                                                 </span>
                                             </div>
-                                            <ChevronRight className="h-3 w-3 text-muted-foreground group-hover:text-accent transition-colors flex-shrink-0" />
+                                            <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-accent transition-colors flex-shrink-0" />
                                         </div>
                                     </button>
                                 ))}
@@ -106,35 +111,35 @@ export function ExampleSelector({ onLoadExample, autoTranslate }: ExampleSelecto
 
                     {/* Intermediate Examples */}
                     {intermediateExamples.length > 0 && (
-                        <div className="space-y-2">
-                            <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+                        <div className="space-y-3">
+                            <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
                                 Intermediate
                             </h4>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                 {intermediateExamples.map((example) => (
                                     <button
                                         key={example.id}
-                                        onClick={() => onLoadExample(example.mCode)}
+                                        onClick={() => handleExampleClick(example.mCode)}
                                         className={cn(
-                                            "group w-full text-left p-3 rounded-xl border transition-all",
+                                            "group w-full text-left p-4 rounded-xl border transition-all",
                                             "hover:scale-[1.02] hover:shadow-md hover:border-accent/60",
                                             "bg-card/50 hover:bg-accent/10",
-                                            "focus:outline-none focus:ring-1 focus:ring-ring"
+                                            "focus:outline-none focus:ring-2 focus:ring-ring"
                                         )}
                                     >
                                         <div className="flex items-center justify-between gap-2">
                                             <div className="flex items-center gap-2 flex-1 min-w-0">
                                                 <Badge
                                                     variant="outline"
-                                                    className={cn("text-[10px] py-0 px-1.5 shrink-0", getCategoryColor(example.category))}
+                                                    className={cn("text-[10px] py-0.5 px-2 shrink-0", getCategoryColor(example.category))}
                                                 >
                                                     {example.category}
                                                 </Badge>
-                                                <span className="font-medium text-xs truncate">
+                                                <span className="font-medium text-sm truncate">
                                                     {example.title}
                                                 </span>
                                             </div>
-                                            <ChevronRight className="h-3 w-3 text-muted-foreground group-hover:text-accent transition-colors flex-shrink-0" />
+                                            <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-accent transition-colors flex-shrink-0" />
                                         </div>
                                     </button>
                                 ))}
@@ -144,43 +149,43 @@ export function ExampleSelector({ onLoadExample, autoTranslate }: ExampleSelecto
 
                     {/* Advanced Examples */}
                     {advancedExamples.length > 0 && (
-                        <div className="space-y-2">
-                            <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+                        <div className="space-y-3">
+                            <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
                                 Advanced
                             </h4>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                 {advancedExamples.map((example) => (
                                     <button
                                         key={example.id}
-                                        onClick={() => onLoadExample(example.mCode)}
+                                        onClick={() => handleExampleClick(example.mCode)}
                                         className={cn(
-                                            "group w-full text-left p-3 rounded-xl border transition-all",
+                                            "group w-full text-left p-4 rounded-xl border transition-all",
                                             "hover:scale-[1.02] hover:shadow-md hover:border-accent/60",
                                             "bg-card/50 hover:bg-accent/10",
-                                            "focus:outline-none focus:ring-1 focus:ring-ring"
+                                            "focus:outline-none focus:ring-2 focus:ring-ring"
                                         )}
                                     >
                                         <div className="flex items-center justify-between gap-2">
                                             <div className="flex items-center gap-2 flex-1 min-w-0">
                                                 <Badge
                                                     variant="outline"
-                                                    className={cn("text-[10px] py-0 px-1.5 shrink-0", getCategoryColor(example.category))}
+                                                    className={cn("text-[10px] py-0.5 px-2 shrink-0", getCategoryColor(example.category))}
                                                 >
                                                     {example.category}
                                                 </Badge>
-                                                <span className="font-medium text-xs truncate">
+                                                <span className="font-medium text-sm truncate">
                                                     {example.title}
                                                 </span>
                                             </div>
-                                            <ChevronRight className="h-3 w-3 text-muted-foreground group-hover:text-accent transition-colors flex-shrink-0" />
+                                            <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-accent transition-colors flex-shrink-0" />
                                         </div>
                                     </button>
                                 ))}
                             </div>
                         </div>
                     )}
-                </CardContent>
-            )}
-        </Card>
+                </div>
+            </DialogContent>
+        </Dialog>
     );
 }
