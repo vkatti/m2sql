@@ -1,0 +1,113 @@
+- generic [ref=e1] [box=0,0,2560,1171]:
+  - generic [ref=e2] [box=0,0,2560,1171]:
+    - banner [ref=e3] [box=0,0,2560,93]:
+      - generic [ref=e5] [box=24,16,2512,60]:
+        - generic [ref=e6] [box=24,16,243,60]:
+          - heading "M2SQL" [level=1] [ref=e7] [box=24,16,243,36]
+          - paragraph [ref=e8] [box=24,56,243,20]: Transform Power Query to Optimized SQL
+        - generic [ref=e9] [box=2298,27,238,39]: Ctrl+Enter translate • Ctrl+K clear
+    - generic [ref=e11] [box=480,93,1600,1189]:
+      - generic [ref=e12] [box=504,117,1552,39]:
+        - generic [ref=e13] [cursor=pointer] [box=504,117,197,39]:
+          - checkbox "Auto-translate examples" [ref=e14] [box=521,129,16,16]
+          - generic [ref=e15] [box=547,127,136,20]: Auto-translate examples
+        - button "Clear All" [ref=e16] [box=1965,123,91,28]:
+          - img [box=1976,130,14,14]
+          - text: Clear All
+      - generic [ref=e17] [box=504,180,1552,464]:
+        - generic [ref=e19] [cursor=pointer] [box=521,197,1517,44]:
+          - generic [ref=e20] [box=521,197,1485,44]:
+            - generic [ref=e21] [box=521,197,1485,24]:
+              - img [ref=e22] [box=521,201,16,16]
+              - text: Quick Start Examples
+            - generic [ref=e25] [box=521,225,1485,16]: Click to load into editor
+          - button [active] [ref=e26] [box=2007,203,32,32]:
+            - img [box=2016,212,14,14]
+        - generic [ref=e89] [box=505,273,1549,353]:
+          - generic [ref=e90] [box=521,273,1517,71]:
+            - heading "Basic" [level=4] [ref=e91] [box=521,273,1517,16]
+            - generic [ref=e92] [box=521,297,1517,47]:
+              - button "basic Basic Column Rename and Filter" [ref=e93] [box=521,297,755,47]:
+                - generic [ref=e94] [box=535,311,728,20]:
+                  - generic [ref=e95] [box=535,311,708,20]:
+                    - generic [ref=e96] [box=535,311,35,20]: basic
+                    - generic [ref=e97] [box=578,313,160,16]: Basic Column Rename and Filter
+                  - img [ref=e98] [box=1251,315,12,12]
+              - button "basic Add Calculated Columns" [ref=e100] [box=1284,297,755,47]:
+                - generic [ref=e101] [box=1297,311,728,20]:
+                  - generic [ref=e102] [box=1297,311,708,20]:
+                    - generic [ref=e103] [box=1297,311,35,20]: basic
+                    - generic [ref=e104] [box=1341,313,121,16]: Add Calculated Columns
+                  - img [ref=e105] [box=2013,315,12,12]
+          - generic [ref=e107] [box=521,360,1517,125]:
+            - heading "Intermediate" [level=4] [ref=e108] [box=521,360,1517,16]
+            - generic [ref=e109] [box=521,384,1517,101]:
+              - button "intermediate Group By with Aggregation" [ref=e110] [box=521,384,755,47]:
+                - generic [ref=e111] [box=535,397,728,20]:
+                  - generic [ref=e112] [box=535,397,708,20]:
+                    - generic [ref=e113] [box=535,397,65,20]: intermediate
+                    - generic [ref=e114] [box=607,399,134,16]: Group By with Aggregation
+                  - img [ref=e115] [box=1251,401,12,12]
+              - button "intermediate Merge Two Tables" [ref=e117] [box=1284,384,755,47]:
+                - generic [ref=e118] [box=1297,397,728,20]:
+                  - generic [ref=e119] [box=1297,397,708,20]:
+                    - generic [ref=e120] [box=1297,397,65,20]: intermediate
+                    - generic [ref=e121] [box=1370,399,89,16]: Merge Two Tables
+                  - img [ref=e122] [box=2013,401,12,12]
+              - button "intermediate Conditional Column Logic" [ref=e124] [box=521,439,755,47]:
+                - generic [ref=e125] [box=535,452,728,20]:
+                  - generic [ref=e126] [box=535,452,708,20]:
+                    - generic [ref=e127] [box=535,452,65,20]: intermediate
+                    - generic [ref=e128] [box=607,454,129,16]: Conditional Column Logic
+                  - img [ref=e129] [box=1251,456,12,12]
+          - generic [ref=e131] [box=521,501,1517,125]:
+            - heading "Advanced" [level=4] [ref=e132] [box=521,501,1517,16]
+            - generic [ref=e133] [box=521,525,1517,101]:
+              - button "advanced Add Row Numbers and Rankings" [ref=e134] [box=521,525,755,47]:
+                - generic [ref=e135] [box=535,539,728,20]:
+                  - generic [ref=e136] [box=535,539,708,20]:
+                    - generic [ref=e137] [box=535,539,52,20]: advanced
+                    - generic [ref=e138] [box=595,541,162,16]: Add Row Numbers and Rankings
+                  - img [ref=e139] [box=1251,543,12,12]
+              - button "advanced Complex Multi-Step Transformation" [ref=e141] [box=1284,525,755,47]:
+                - generic [ref=e142] [box=1297,539,728,20]:
+                  - generic [ref=e143] [box=1297,539,708,20]:
+                    - generic [ref=e144] [box=1297,539,52,20]: advanced
+                    - generic [ref=e145] [box=1358,541,176,16]: Complex Multi-Step Transformation
+                  - img [ref=e146] [box=2013,543,12,12]
+              - button "advanced Running Total Calculation" [ref=e148] [box=521,580,755,47]:
+                - generic [ref=e149] [box=535,593,728,20]:
+                  - generic [ref=e150] [box=535,593,708,20]:
+                    - generic [ref=e151] [box=535,593,52,20]: advanced
+                    - generic [ref=e152] [box=595,595,127,16]: Running Total Calculation
+                  - img [ref=e153] [box=1251,597,12,12]
+      - generic [ref=e27] [box=504,668,1552,591]:
+        - generic [ref=e28] [box=504,668,768,591]:
+          - generic [ref=e30] [box=521,685,733,28]:
+            - img [ref=e31] [box=521,689,20,20]
+            - text: M Code Input
+          - generic [ref=e70] [box=505,741,765,28]:
+            - generic [ref=e73] [box=505,745,20,20]: "1"
+            - textbox [ref=e76] [box=535,741,736,28]:
+              - generic [ref=e77] [box=535,745,736,20]:
+                - generic [box=541,745,508,20]: Paste your Power Query (M) code here or select an example above...
+        - generic [ref=e38] [box=1240,923,80,80]:
+          - button [disabled] [box=1240,923,80,80]:
+            - img [box=1272,955,16,16]
+        - generic [ref=e39] [box=1288,668,768,591]:
+          - generic [ref=e42] [box=1305,685,124,28]:
+            - img [ref=e43] [box=1305,689,20,20]
+            - text: SQL Output
+          - generic [ref=e48] [box=1289,741,765,395]:
+            - generic [ref=e50] [box=1307,759,124,28]:
+              - img [ref=e51] [box=1307,763,20,20]
+              - text: SQL Output
+            - generic [ref=e80] [box=1291,819,763,28]:
+              - generic [ref=e83] [box=1291,823,20,20]: "1"
+              - textbox [ref=e86] [box=1320,819,733,28]:
+                - generic [ref=e87] [box=1320,823,733,20]:
+                  - generic [box=1326,823,231,20]: SQL output will appear here...
+  - region "Notifications alt+T" [box=0,1171,2560,0]
+  - button "Open Next.js Dev Tools" [ref=e64] [cursor=pointer] [box=22,1117,32,32]:
+    - img [ref=e65] [box=22,1113,40,40]
+  - alert [ref=e88] [box=-1,-1,1,1]

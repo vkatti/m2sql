@@ -1,0 +1,114 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e5]:
+        - generic [ref=e6]:
+          - heading "M2SQL" [level=1] [ref=e7]
+          - paragraph [ref=e8]: Transform Power Query to Optimized SQL
+        - button "Stack Vertically" [ref=e10]:
+          - img
+          - text: Stack Vertically
+    - generic [ref=e12]:
+      - generic [ref=e15]:
+        - generic:
+          - generic [ref=e16]:
+            - button "Translate to SQL" [disabled]:
+              - img
+              - text: Translate to SQL
+            - button "Clear" [ref=e17]:
+              - img
+              - text: Clear
+          - generic [ref=e18] [cursor=pointer]:
+            - checkbox "Auto-translate on example load" [ref=e19]
+            - text: Auto-translate on example load
+        - generic [ref=e20]:
+          - generic [ref=e21]:
+            - generic [ref=e22]:
+              - img [ref=e23]
+              - text: Quick Start Examples
+            - generic [ref=e26]: Click any example to load it into the editor
+          - generic [ref=e27]:
+            - generic:
+              - heading "Basic" [level=4]
+              - generic:
+                - 'button "basic Basic Column Rename and Filter Simple transformation: rename columns and filter rows" [ref=e28]':
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic [ref=e29]: basic
+                        - generic: Basic Column Rename and Filter
+                      - paragraph: "Simple transformation: rename columns and filter rows"
+                    - img [ref=e30]
+                - button "basic Add Calculated Columns Create new columns based on existing data" [ref=e32]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic [ref=e33]: basic
+                        - generic: Add Calculated Columns
+                      - paragraph: Create new columns based on existing data
+                    - img [ref=e34]
+            - generic:
+              - heading "Intermediate" [level=4]
+              - generic:
+                - button "intermediate Group By with Aggregation Group sales by customer with total calculations" [ref=e36]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic [ref=e37]: intermediate
+                        - generic: Group By with Aggregation
+                      - paragraph: Group sales by customer with total calculations
+                    - img [ref=e38]
+                - button "intermediate Merge Two Tables Left join customers with orders" [ref=e40]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic [ref=e41]: intermediate
+                        - generic: Merge Two Tables
+                      - paragraph: Left join customers with orders
+                    - img [ref=e42]
+                - button "intermediate Conditional Column Logic Add columns with if-then-else logic" [ref=e44]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic [ref=e45]: intermediate
+                        - generic: Conditional Column Logic
+                      - paragraph: Add columns with if-then-else logic
+                    - img [ref=e46]
+            - generic:
+              - heading "Advanced" [level=4]
+              - generic:
+                - button "advanced Add Row Numbers and Rankings Partition by category, order by sales with row numbers" [ref=e48]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic [ref=e49]: advanced
+                        - generic: Add Row Numbers and Rankings
+                      - paragraph: Partition by category, order by sales with row numbers
+                    - img [ref=e50]
+                - button "advanced Complex Multi-Step Transformation Multiple joins, filters, calculations, and groupings" [ref=e52]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic [ref=e53]: advanced
+                        - generic: Complex Multi-Step Transformation
+                      - paragraph: Multiple joins, filters, calculations, and groupings
+                    - img [ref=e54]
+                - button "advanced Running Total Calculation Calculate cumulative sum partitioned by category" [ref=e56]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic [ref=e57]: advanced
+                        - generic: Running Total Calculation
+                      - paragraph: Calculate cumulative sum partitioned by category
+                    - img [ref=e58]
+        - generic [ref=e62]:
+          - img [ref=e63]
+          - text: M Code Input
+      - separator [ref=e68]
+      - generic [ref=e75]:
+        - img [ref=e76]
+        - text: SQL Output
+    - generic [ref=e82]: Ctrl+Enter to translate • Ctrl+K to clear
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=e88] [cursor=pointer]:
+    - img [ref=e89]

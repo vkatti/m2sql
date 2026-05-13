@@ -101,6 +101,33 @@ Use:
 
 Lesson cards should feel inviting and lightweight. Use `bg-card/70`, `backdrop-blur-xl`, soft borders, and subtle shadows. Nested content cards use even softer backgrounds (`bg-background/40`).
 
+**Collapsible Cards:**
+
+Some cards like the Example Selector support collapse/expand interaction:
+
+```tsx
+<Card className="backdrop-blur-xl bg-card/70 border border-border/40 shadow-lg rounded-2xl">
+  <CardHeader 
+    className="cursor-pointer hover:bg-accent/5 transition-colors"
+    onClick={() => setIsExpanded(!isExpanded)}
+  >
+    <div className="flex items-center justify-between">
+      <CardTitle>Quick Start Examples</CardTitle>
+      <Button variant="ghost" size="sm" className="h-8 w-8 p-0 rounded-full">
+        {isExpanded ? <ChevronUp /> : <ChevronDown />}
+      </Button>
+    </div>
+  </CardHeader>
+  {isExpanded && <CardContent>...</CardContent>}
+</Card>
+```
+
+Features:
+- Entire header is clickable with hover state
+- Chevron icon indicates expand/collapse state
+- Content animates in with `animate-in slide-in-from-top-2`
+- Hidden by default to maximize workspace
+
 ### Buttons
 
 Primary buttons use soft purple gradients, rounded-full shape, medium font weight, and a gentle hover lift with glow. Secondary buttons are translucent with soft borders that brighten on hover.
@@ -110,6 +137,26 @@ Primary buttons use soft purple gradients, rounded-full shape, medium font weigh
   Start Learning
 </Button>
 ```
+
+**Special Action Buttons:**
+
+The M2SQL translator features a prominent center action button:
+
+```tsx
+<Button 
+  size="lg"
+  className="h-20 w-20 rounded-full shadow-2xl transition-all duration-300 hover:scale-110 hover:shadow-[0_0_50px_-5px_oklch(0.65_0.22_275_/_60%)] bg-gradient-to-br from-primary via-accent to-primary border-4 border-background"
+>
+  <Zap className="h-8 w-8" />
+</Button>
+```
+
+This large circular button (80px) sits between the input and output panels with:
+- Gradient background (primary → accent → primary)
+- Dramatic shadow with color glow on hover
+- Scale animation (110%) on hover
+- White border to separate from background
+- Large icon (32px) for clear visual affordance
 
 ### Inputs
 
@@ -145,8 +192,52 @@ Use a comfortable learning canvas:
 
 ```tsx
 <main className="learning-bg min-h-screen">
-  <div className="container mx-auto max-w-[1400px] px-4 py-6 lg:py-10">
+  <div className="container mx-auto max-w-[1600px] px-6 py-6">
 ```
+
+### M2SQL Translator Layout
+
+The M2SQL translator uses a specialized side-by-side layout with centered action button:
+
+**Header:**
+- Fixed header with gradient logo and tagline on the left
+- Keyboard shortcuts badge positioned in top right corner
+- Frosted glass effect with subtle shadow
+
+**Content Area:**
+- Container with max-width of 1600px for optimal viewing
+- Quick actions bar at the top (auto-translate toggle, clear button)
+- Collapsible example selector (hidden by default, expands on click)
+- Side-by-side editor panels with 2-column grid on larger screens
+
+**Side-by-Side Editors:**
+```tsx
+<div className="relative flex items-stretch gap-4">
+  {/* M Code Input - Left */}
+  <Card className="flex-1 min-h-[500px]">...</Card>
+  
+  {/* Big Round Translate Button - Center */}
+  <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+    <Button className="h-20 w-20 rounded-full shadow-2xl">
+      <Zap className="h-8 w-8" />
+    </Button>
+  </div>
+  
+  {/* SQL Output - Right */}
+  <Card className="flex-1 min-h-[500px]">...</Card>
+</div>
+```
+
+**Translation Insights:**
+- Full-width panel below the side-by-side editors
+- Only visible when explanation or optimizations are available
+- Provides detailed translation context and performance tips
+
+**Key Features:**
+- **Collapsible Examples:** Quick Start Examples section collapses by default to maximize workspace
+- **Center Action Button:** Large, prominent 80px round button positioned between input/output panels
+- **Keyboard Shortcuts Badge:** Always visible in top-right header for quick reference
+- **Responsive Layout:** Adapts gracefully on mobile with vertical stacking
 
 Course layouts use a flexible grid:
 

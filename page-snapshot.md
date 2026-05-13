@@ -1,0 +1,54 @@
+- generic [ref=e1] [box=0,0,2560,1171]:
+  - generic [ref=e2] [box=0,0,2560,1171]:
+    - banner [ref=e3] [box=0,0,2560,93]:
+      - generic [ref=e5] [box=24,16,2512,60]:
+        - generic [ref=e6] [box=24,16,243,60]:
+          - heading "M2SQL" [level=1] [ref=e7] [box=24,16,243,36]
+          - paragraph [ref=e8] [box=24,56,243,20]: Transform Power Query to Optimized SQL
+        - generic [ref=e9] [box=2298,27,238,39]: Ctrl+Enter translate • Ctrl+K clear
+    - generic [ref=e11] [box=480,93,1600,820]:
+      - generic [ref=e12] [box=504,117,1552,39]:
+        - generic [ref=e13] [cursor=pointer] [box=504,117,197,39]:
+          - checkbox "Auto-translate examples" [ref=e14] [box=521,129,16,16]
+          - generic [ref=e15] [box=547,127,136,20]: Auto-translate examples
+        - button "Clear All" [ref=e16] [box=1965,123,91,28]:
+          - img [box=1976,130,14,14]
+          - text: Clear All
+      - generic [ref=e19] [cursor=pointer] [box=521,197,1517,44]:
+        - generic [ref=e20] [box=521,197,1485,44]:
+          - generic [ref=e21] [box=521,197,1485,24]:
+            - img [ref=e22] [box=521,201,16,16]
+            - text: Quick Start Examples
+          - generic [ref=e25] [box=521,225,1485,16]: Click to load into editor
+        - button [ref=e26] [box=2007,203,32,32]:
+          - img [box=2016,212,14,14]
+      - generic [ref=e27] [box=504,299,1552,591]:
+        - generic [ref=e28] [box=504,299,768,591]:
+          - generic [ref=e30] [box=521,316,733,28]:
+            - img [ref=e31] [box=521,320,20,20]
+            - text: M Code Input
+          - generic [ref=e70] [box=505,372,765,28]:
+            - generic [ref=e73] [box=505,376,20,20]: "1"
+            - textbox [ref=e76] [box=535,372,736,28]:
+              - generic [ref=e77] [box=535,376,736,20]:
+                - generic [box=541,376,508,20]: Paste your Power Query (M) code here or select an example above...
+        - generic [ref=e38] [box=1240,554,80,80]:
+          - button [disabled] [box=1240,554,80,80]:
+            - img [box=1272,586,16,16]
+        - generic [ref=e39] [box=1288,299,768,591]:
+          - generic [ref=e42] [box=1305,316,124,28]:
+            - img [ref=e43] [box=1305,320,20,20]
+            - text: SQL Output
+          - generic [ref=e48] [box=1289,372,765,395]:
+            - generic [ref=e50] [box=1307,389,124,28]:
+              - img [ref=e51] [box=1307,393,20,20]
+              - text: SQL Output
+            - generic [ref=e80] [box=1291,449,763,28]:
+              - generic [ref=e83] [box=1291,453,20,20]: "1"
+              - textbox [active] [ref=e86] [box=1320,449,733,28]:
+                - generic [ref=e87] [box=1320,453,733,20]:
+                  - generic [box=1326,453,231,20]: SQL output will appear here...
+  - region "Notifications alt+T" [box=0,1171,2560,0]
+  - button "Open Next.js Dev Tools" [ref=e64] [cursor=pointer] [box=22,1117,32,32]:
+    - img [ref=e65] [box=22,1113,40,40]
+  - alert [ref=e88] [box=-1,-1,1,1]

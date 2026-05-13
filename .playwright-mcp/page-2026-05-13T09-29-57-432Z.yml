@@ -1,0 +1,54 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e5]:
+        - generic [ref=e6]:
+          - heading "M2SQL" [level=1] [ref=e7]
+          - paragraph [ref=e8]: Transform Power Query to Optimized SQL
+        - generic [ref=e9]: Ctrl+Enter translate • Ctrl+K clear
+    - generic [ref=e11]:
+      - generic [ref=e12]:
+        - generic [ref=e13] [cursor=pointer]:
+          - checkbox "Auto-translate examples" [ref=e14]
+          - generic [ref=e15]: Auto-translate examples
+        - button "Clear All" [ref=e16]:
+          - img
+          - text: Clear All
+      - generic [ref=e19] [cursor=pointer]:
+        - generic [ref=e20]:
+          - generic [ref=e21]:
+            - img [ref=e22]
+            - text: Quick Start Examples
+          - generic [ref=e25]: Click to load into editor
+        - button [ref=e26]:
+          - img
+      - generic [ref=e27]:
+        - generic [ref=e28]:
+          - generic [ref=e30]:
+            - img [ref=e31]
+            - text: M Code Input
+          - generic [ref=e40]:
+            - generic [ref=e43]: "1"
+            - textbox [ref=e46]:
+              - generic [ref=e47]:
+                - generic: Paste your Power Query (M) code here or select an example above...
+        - generic [ref=e48]:
+          - button [disabled]:
+            - img
+        - generic [ref=e49]:
+          - generic [ref=e52]:
+            - img [ref=e53]
+            - text: SQL Output
+          - generic [ref=e58]:
+            - generic [ref=e60]:
+              - img [ref=e61]
+              - text: SQL Output
+            - generic [ref=e71]:
+              - generic [ref=e74]: "1"
+              - textbox [ref=e77]:
+                - generic [ref=e78]:
+                  - generic: SQL output will appear here...
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=e84] [cursor=pointer]:
+    - img [ref=e85]
+  - alert [ref=e88]
