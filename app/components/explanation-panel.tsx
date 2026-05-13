@@ -34,7 +34,7 @@ export function ExplanationPanel({
                 </CardTitle>
             </CardHeader>
             <CardContent className="space-y-5">
-                <ScrollArea className="max-h-[300px]">
+                <ScrollArea className="w-full">
                     {explanation && (
                         <div className="mb-6 pr-4">
                             <h4 className="text-sm font-semibold mb-3 text-muted-foreground uppercase tracking-wide">
