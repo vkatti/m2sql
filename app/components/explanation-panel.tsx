@@ -53,8 +53,8 @@ export function ExplanationPanel({
                             </h4>
                             <ul className="space-y-3">
                                 {optimizations.map((opt, index) => (
-                                    <li 
-                                        key={index} 
+                                    <li
+                                        key={index}
                                         className="flex items-start gap-3 text-sm leading-relaxed group"
                                     >
                                         <span className="text-success text-lg mt-0.5 shrink-0 group-hover:scale-125 transition-transform">•</span>
