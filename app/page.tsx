@@ -157,6 +157,9 @@ export default function Home() {
             </Alert>
           )}
 
+          {/* Example Selector - Collapsible */}
+          <ExampleSelector onLoadExample={handleLoadExample} autoTranslate={autoTranslate} />
+
           {/* Quick Actions Bar */}
           <div className="flex items-center justify-between gap-3 flex-wrap">
             <label className="flex items-center gap-2.5 text-sm text-muted-foreground cursor-pointer hover:text-foreground transition-colors bg-card/40 backdrop-blur-sm px-4 py-2 rounded-full border border-border/20">
@@ -180,9 +183,6 @@ export default function Home() {
               Clear All
             </Button>
           </div>
-
-          {/* Example Selector - Collapsible */}
-          <ExampleSelector onLoadExample={handleLoadExample} autoTranslate={autoTranslate} />
 
           {/* Main Editor Area - Side by Side with Center Button */}
           <div className="relative flex items-stretch gap-4">
