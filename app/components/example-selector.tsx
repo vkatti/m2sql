@@ -57,7 +57,7 @@ export function ExampleSelector({ onLoadExample, autoTranslate, open, onOpenChan
                 <Sparkles className="h-4 w-4 text-accent" />
                 Quick Start Examples
             </DialogTrigger>
-            <DialogContent className="max-w-[90vw] max-h-[80vh] overflow-y-auto">
+            <DialogContent className="!max-w-[90vw] max-h-[80vh] overflow-y-auto">
                 <DialogHeader>
                     <DialogTitle className="flex items-center gap-2 text-xl">
                         <Sparkles className="h-5 w-5 text-accent" />

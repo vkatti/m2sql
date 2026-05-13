@@ -134,7 +134,7 @@ export default function Home() {
                 M2SQL
               </h1>
               <p className="text-sm text-muted-foreground font-light">
-                Transform Power Query to Optimized SQL
+                Transform Power Query (M Code) to Optimized SQL
               </p>
             </div>
 
@@ -194,7 +194,7 @@ export default function Home() {
           {/* Main Editor Area - Side by Side with Center Button */}
           <div className="relative flex items-stretch gap-4">
             {/* M Code Input - Left Side */}
-            <Card className="flex-1 flex flex-col min-h-[500px] backdrop-blur-xl bg-card/70 border border-border/40 shadow-lg transition-all duration-300 hover:shadow-xl rounded-2xl overflow-hidden">
+            <Card className="flex-1 flex flex-col min-h-[300px] backdrop-blur-xl bg-card/70 border border-border/40 shadow-lg transition-all duration-300 hover:shadow-xl rounded-2xl overflow-hidden">
               <CardHeader className="pb-3 shrink-0">
                 <CardTitle className="text-lg font-semibold flex items-center gap-2">
                   <FileCode className="h-5 w-5 text-accent" />
@@ -228,7 +228,7 @@ export default function Home() {
             </div>
 
             {/* SQL Output - Right Side */}
-            <Card className="flex-1 flex flex-col min-h-[500px] backdrop-blur-xl bg-card/70 border border-border/40 shadow-lg transition-all duration-300 hover:shadow-xl rounded-2xl overflow-hidden">
+            <Card className="flex-1 flex flex-col min-h-[300px] backdrop-blur-xl bg-card/70 border border-border/40 shadow-lg transition-all duration-300 hover:shadow-xl rounded-2xl overflow-hidden">
               <CardHeader className="pb-3 shrink-0">
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-lg font-semibold flex items-center gap-2">

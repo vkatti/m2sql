@@ -23,7 +23,7 @@ export function SQLOutput({ sql, isLoading }: SQLOutputProps) {
     }
 
     return (
-        <div className="min-h-[200px] h-full">
+        <div className="min-h-[150px] h-full">
             <CodeEditor
                 value={sql}
                 onChange={() => { }}

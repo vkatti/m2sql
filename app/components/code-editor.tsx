@@ -28,7 +28,7 @@ export function CodeEditor({
     ];
 
     return (
-        <div className={`min-h-[500px] ${className}`}>
+        <div className={`min-h-[300px] ${className}`}>
             <CodeMirror
                 value={value}
                 onChange={onChange}

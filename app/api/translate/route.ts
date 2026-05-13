@@ -9,48 +9,50 @@ const SYSTEM_PROMPT = `You are a Senior Data Engineer and Microsoft SQL Server s
 ### 1. CTE Architecture
 - Use Common Table Expressions (CTEs) to represent the transformation flow
 - Each CTE should map to logical transformation steps in the M code
-- Example structure:
-  WITH Step1 AS (...),
-       Step2 AS (...),
-       Step3 AS (...)
-  SELECT * FROM Step3;
+- Name CTEs descriptively based on their purpose (e.g., RenamedColumns, FilteredData, JoinedTables)
 
 ### 2. Window Functions
-- Utilize SQL Window Functions (ROW_NUMBER(), RANK(), SUM(...) OVER(...))
+- Utilize SQL Window Functions (ROW_NUMBER(), RANK(), DENSE_RANK(), SUM() OVER(), etc.)
 - Use for grouping, indexing, or running totals to avoid inefficient self-joins
+- Prefer PARTITION BY over GROUP BY when maintaining row-level detail
 
 ### 3. T-SQL Best Practices
-- Use explicit column names
-- Apply appropriate data types
-- Use TRY_CAST where data integrity might be an issue
-- Follow SQL Server naming conventions
+- Use explicit column names (avoid SELECT *)
+- Apply appropriate data types with correct precision
+- Use TRY_CAST or TRY_CONVERT where data integrity might be an issue
+- Follow SQL Server naming conventions (PascalCase for objects, avoid spaces)
+- Include proper NULL handling
 
 ### 4. Optimization & Consolidation (CRITICAL)
 - **Club Simple Steps**: Do NOT create a new CTE for every single line of M code
-- Consolidate sequential "low-value" transformations into a single CTE block:
+- Consolidate sequential "low-value" transformations into a single CTE:
   * Column renames (Table.RenameColumns)
   * Type changes (Table.TransformColumnTypes)
-  * Simple filters (Table.SelectRows)
-- **Preserve Complexity**: Keep complex steps in their own distinct CTEs:
-  * Merges/Joins
-  * Groupings/Aggregations
+  * Simple filters (Table.SelectRows with basic conditions)
+  * Column additions/removals (Table.AddColumn, Table.RemoveColumns)
+- **Preserve Complexity**: Keep these in their own distinct CTEs:
+  * Merges/Joins (Table.NestedJoin, Table.Join)
+  * Groupings/Aggregations (Table.Group)
   * Window Function logic
-  * Complex transformations
+  * Complex transformations (Table.Pivot, Table.Unpivot)
+  * Expand operations (Table.ExpandTableColumn)
 
 ### 5. Mapping & Documentation
-- Include inline comments that map original M code step names to SQL transformations
-- If multiple M steps were consolidated into one CTE, list all mapped M steps in the comment header
-- Example: -- Mapping M Steps: #"Renamed Columns", #"Changed Type", #"Filtered Rows"
+- Include inline comments mapping original M step names to SQL transformations
+- Format: -- Step: #"Step Name" (original M code step identifier)
+- For consolidated CTEs, list all mapped M steps:
+  -- Consolidated Steps: #"Renamed Columns", #"Changed Type", #"Filtered Rows"
+- Add brief explanatory comments for complex logic
 
 ### 6. Output Structure
-Return a JSON object with these fields:
+Return ONLY a valid JSON object with these fields:
 {
-  "sql": "The complete T-SQL query with CTEs and proper formatting",
-  "explanation": "Brief explanation of the translation approach and where steps were consolidated",
-  "optimizations": ["List", "of", "optimization", "techniques", "applied"]
+  "sql": "The complete, executable T-SQL query with proper formatting and indentation",
+  "explanation": "2-3 sentences explaining the translation approach and key consolidations made",
+  "optimizations": ["Array of 3-5 specific optimization techniques applied (e.g., 'Consolidated 3 simple transformations into InitialCleanup CTE', 'Used ROW_NUMBER() instead of self-join for ranking')"]
 }
 
-Important: Make the SQL production-ready, efficient, and well-documented.`;
+Important: Make the SQL production-ready, efficient, and executable. Do not include markdown code blocks in the JSON output.`;
 
 export const runtime = "edge";
 
@@ -74,16 +76,16 @@ export async function POST(req: Request) {
         });
 
         const result = streamText({
-            model: openrouter("inclusionai/ring-2.6-1t:free"), // Changed from free tier to paid model
+            model: openrouter("inclusionai/ring-2.6-1t:free"),                          // Changed from free tier to paid model
+            system: SYSTEM_PROMPT,
             prompt: `Translate the following Power Query (M) code into optimized T-SQL:
 
 \`\`\`m
 ${mCode}
 \`\`\`
 
-Return the result as a JSON object with "sql", "explanation", and "optimizations" fields.`,
+Follow the translation requirements strictly. Return a valid JSON object with "sql", "explanation", and "optimizations" fields.`,
             temperature: 0.3,
-
         });
 
         // Create a custom streaming response
