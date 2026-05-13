@@ -9,10 +9,16 @@ import { SQLOutput } from "./components/sql-output";
 import { ExplanationPanel } from "./components/explanation-panel";
 import { ExampleSelector } from "./components/example-selector";
 import { useKeyboardShortcuts } from "./hooks/use-keyboard-shortcuts";
-import { AlertCircle, Zap, Trash2, FileCode, Copy, Download, Loader2, Code2 } from "lucide-react";
+import { AlertCircle, Zap, Trash2, FileCode, Copy, Download, Loader2, Code2, LogOut, User } from "lucide-react";
 import { toast } from "sonner";
+import { useAuth } from "./providers";
+import { createClient } from "@/lib/supabase/client";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const { user, loading: authLoading } = useAuth();
+  const router = useRouter();
+  const supabase = createClient();
   const [mCode, setMCode] = useState("");
   const [sqlOutput, setSqlOutput] = useState("");
   const [explanation, setExplanation] = useState("");
@@ -123,6 +129,23 @@ export default function Home() {
     isLoading,
   });
 
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    router.push('/auth/login');
+  };
+
+  // Show loading while auth initializes
+  if (authLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen learning-bg">
+        <div className="text-center space-y-4">
+          <Loader2 className="h-12 w-12 animate-spin text-primary mx-auto" />
+          <p className="text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-gradient-to-br from-background via-accent/5 to-primary/5">
       {/* Hero Header */}
@@ -138,9 +161,32 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Keyboard Shortcuts Badge - Top Right */}
-            <div className="backdrop-blur-xl bg-card/90 border border-border/40 shadow-xl px-5 py-2.5 text-xs text-muted-foreground rounded-full opacity-80 hover:opacity-100 transition-all hover:scale-105 hover:shadow-[0_0_30px_-10px_oklch(0.65_0.22_275_/_30%)]">
-              <span className="font-mono font-semibold text-primary">Ctrl+Enter</span> <span className="text-muted-foreground/60">translate</span> • <span className="font-mono font-semibold text-accent">Ctrl+K</span> <span className="text-muted-foreground/60">clear</span>
+            <div className="flex items-center gap-4">
+              {/* User Info */}
+              <div className="flex items-center gap-3 backdrop-blur-xl bg-card/90 border border-border/40 shadow-xl px-5 py-2.5 rounded-full">
+                <div className="flex items-center gap-2">
+                  <div className="flex items-center justify-center h-8 w-8 rounded-full bg-primary/20 text-primary">
+                    <User className="h-4 w-4" />
+                  </div>
+                  <span className="text-sm text-foreground font-medium">
+                    {user?.email}
+                  </span>
+                </div>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleLogout}
+                  className="h-8 gap-2 rounded-full hover:bg-destructive/10 hover:text-destructive transition-colors"
+                >
+                  <LogOut className="h-3.5 w-3.5" />
+                  Logout
+                </Button>
+              </div>
+
+              {/* Keyboard Shortcuts Badge */}
+              <div className="backdrop-blur-xl bg-card/90 border border-border/40 shadow-xl px-5 py-2.5 text-xs text-muted-foreground rounded-full opacity-80 hover:opacity-100 transition-all hover:scale-105 hover:shadow-[0_0_30px_-10px_oklch(0.65_0.22_275_/_30%)]">
+                <span className="font-mono font-semibold text-primary">Ctrl+Enter</span> <span className="text-muted-foreground/60">translate</span> • <span className="font-mono font-semibold text-accent">Ctrl+K</span> <span className="text-muted-foreground/60">clear</span>
+              </div>
             </div>
           </div>
         </div>

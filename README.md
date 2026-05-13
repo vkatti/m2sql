@@ -2,9 +2,12 @@
 
 A production-ready Next.js application that translates Power Query (M) code into optimized Microsoft SQL Server T-SQL queries using Claude 3.5 Sonnet AI via OpenRouter.
 
+**Note**: This application requires authentication. Users must create an account and sign in before accessing the translator.
+
 ## Features
 
-- 🚀 **Real-time AI Translation**: Convert M Code to T-SQL instantly
+- � **Secure Authentication**: Email/password and OAuth (Google, GitHub) via Supabase
+- �🚀 **Real-time AI Translation**: Convert M Code to T-SQL instantly
 - 📝 **Split-Pane Editor**: CodeMirror-powered editors with syntax highlighting
 - 🎯 **Optimized Output**: Consolidates simple steps, uses CTEs and window functions
 - 📚 **Example Library**: 8 pre-loaded examples (basic to advanced)
@@ -17,6 +20,7 @@ A production-ready Next.js application that translates Power Query (M) code into
 
 - **Framework**: Next.js 16.2.6 (App Router)
 - **Language**: TypeScript 5
+- **Authentication**: Supabase Auth
 - **Styling**: Tailwind CSS 4
 - **UI Components**: shadcn/ui
 - **Code Editor**: CodeMirror 6
@@ -28,6 +32,7 @@ A production-ready Next.js application that translates Power Query (M) code into
 ### Prerequisites
 
 - Node.js 18+ installed
+- Supabase account ([Create one here](https://supabase.com))
 - OpenRouter API key ([Get one here](https://openrouter.ai/keys))
 
 ### Installation
@@ -46,10 +51,60 @@ A production-ready Next.js application that translates Power Query (M) code into
 3. **Configure environment variables**
    
    Create a `.env.local` file in the root directory:
-   ```env
+   # OpenRouter API Key
    OPENROUTER_API_KEY=your_api_key_here
-   ```
+   
+   # Supabase Configuration
+   NEXT_PUBLIC_SUPABASE_URL=your-project-url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+   
+   # App Configuration
+6. **Create your first account**
+   
+   Navigate to [http://localhost:3000](http://localhost:3000), which will redirect you to the login page. Click "Sign up" to create a new account.
 
+## Usage
+
+### Authentication
+
+1. **Sign Up**: Create an account with email/password or use OAuth (Google/GitHub)
+2. **Email Verification**: Check your email for a verification link (required before login)
+3. **Sign In**: Use your credentials to access the translator
+4. **Remember Me**: Check this option to stay logged in across browser sessions
+   a. **Create a Supabase project**:
+      - Go to [https://supabase.com/dashboard](https://supabase.com/dashboard)
+      - Click "New Project"
+      - Fill in project details and create
+   
+   b. **Get your credentials**:
+      - Go to Project Settings > API
+      - Copy the "Project URL" to `NEXT_PUBLIC_SUPABASE_URL`
+      - Copy the "anon/public" key to `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   
+   c. **Configure Email Authentication**:
+      - Go to Authentication > Providers
+      - Enable "Email" provider
+      - Configure email templates (optional)
+   
+   d. **Configure OAuth Providers** (optional):
+      
+      **Google OAuth**:
+      - Go to [Google Cloud Console](https://console.cloud.google.com/)
+      - Create OAuth 2.0 credentials
+      - Add authorized redirect URI: `https://[your-project-ref].supabase.co/auth/v1/callback`
+      - Copy Client ID and Secret to Supabase Dashboard > Authentication > Providers > Google
+      
+      **GitHub OAuth**:
+      - Go to GitHub Settings > Developer settings > OAuth Apps
+      - Create new OAuth App
+      - Add Authorization callback URL: `https://[your-project-ref].supabase.co/auth/v1/callback`
+      - Copy Client ID and Secret to Supabase Dashboard > Authentication > Providers > GitHub
+   
+   e. **Configure Email Settings**:
+      - Go to Authentication > Email Templates
+      - Customize confirmation and password reset emails (optional)
+
+5
 4. **Run the development server**
    ```bash
    npm run dev
@@ -62,18 +117,32 @@ A production-ready Next.js application that translates Power Query (M) code into
 ## Usage
 
 ### Basic Translation
-
-1. **Load an Example** (optional): Select from the dropdown in the left panel
-2. **Paste M Code**: Enter your Power Query code in the left editor
-3. **Translate**: Click the "Translate" button or press `Ctrl+Enter`
-4. **View Results**: SQL output appears in the right panel with explanations
-
-### Keyboard Shortcuts
-
-- `Ctrl+Enter` (or `Cmd+Enter` on Mac): Trigger translation
-- `Ctrl+K` (or `Cmd+K` on Mac): Clear all inputs
-- `Esc`: Dismiss error messages
-
+ (protected)
+│   ├── auth/                 # Authentication pages
+│   │   ├── login/            # Login page
+│   │   ├── signup/           # Registration page
+│   │   ├── forgot-password/  # Password reset request
+│   │   ├── reset-password/   # Password reset form
+│   │   ├── verify-email/     # Email verification page
+│   │   ├── callback/         # OAuth callback handler
+│   │   └── components/       # Auth UI components
+│   ├── components/           # React components
+│   │   ├── code-editor.tsx
+│   │   ├── sql-output.tsx
+│   │   ├── action-toolbar.tsx
+│   │   ├── explanation-panel.tsx
+│   │   └── example-selector.tsx
+│   ├── data/                 # Example M Code snippets
+│   ├── hooks/                # Custom React hooks
+│   ├── lib/                  # Utilities (M language definition)
+│   ├── providers.tsx         # Auth context provider
+│   └── page.tsx              # Main application page (protected)
+├── components/ui/            # shadcn/ui components
+├── lib/supabase/             # Supabase client utilities
+│   ├── client.ts             # Client-side Supabase client
+│   ├── server.ts             # Server-side Supabase client
+│   └── middleware.ts         # Session refresh helper
+├── middleware.ts             # Next.js middleware (route protection)
 ### Layout Options
 
 Click the **Vertical/Horizontal** button in the header to toggle between:

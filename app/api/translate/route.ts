@@ -1,5 +1,6 @@
 import { createOpenRouter } from "@openrouter/ai-sdk-provider";
 import { streamText } from "ai";
+import { createClient } from "@/lib/supabase/server";
 
 // System prompt for M Code to SQL translation
 const SYSTEM_PROMPT = `You are a Senior Data Engineer and Microsoft SQL Server specialist with expertise in translating Power Query (M) code into highly optimized, production-ready T-SQL.
@@ -60,6 +61,16 @@ export const runtime = "edge";
 
 export async function POST(req: Request) {
     try {
+        // Verify authentication
+        const supabase = await createClient()
+        const {
+            data: { user },
+        } = await supabase.auth.getUser()
+
+        if (!user) {
+            return new Response('Unauthorized', { status: 401 })
+        }
+
         const { mCode } = await req.json();
 
         if (!mCode || typeof mCode !== "string") {
