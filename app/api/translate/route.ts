@@ -89,7 +89,7 @@ export async function POST(req: Request) {
         });
 
         const result = streamText({
-            model: openrouter("inclusionai/ring-2.6-1t:free"),                          // Changed from free tier to paid model
+            model: openrouter("deepseek/deepseek-v4-flash:free"),                          // Changed from free tier to paid model
             system: SYSTEM_PROMPT,
             prompt: `Translate the following Power Query (M) code into optimized T-SQL:
 
